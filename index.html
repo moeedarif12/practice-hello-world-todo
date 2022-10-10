@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Apna Air Sys Borg</title>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.2/axios.min.js" integrity="sha512-bHeT+z+n8rh9CKrSrbyfbINxu7gsBmSHlDCb3gUF1BjmjDzKhoKspyB71k0CIRBSjE5IVQiMMVBgCWjF60qsvA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -19,10 +20,12 @@
     <h3 id="result">     </h3>
 
     <script>
+       let api="http://localhost:3000"
+   // let api="https://embarrassed-boa-cummerbund.cyclic.app";
         function postTodo() {
             let todoText = (document.querySelector("#todo").value)
 
-         axios.post(`http://localhost:3000/todo`, {
+         axios.post(`${api}/todo`, {
             text: todoText
          })
                 .then(function (response) {
@@ -32,7 +35,7 @@
                     document.querySelector("#result").innerHTML = "" 
                   
                     response.data.data.map(eachTodo=>{
-                        document.querySelector("#result").innerHTML += eachTodo 
+                        document.querySelector("#result").innerHTML += eachTodo
                         document.querySelector("#result").innerHTML += '<br>'
 
                     })
@@ -49,7 +52,7 @@
    
    
      function getAllTodos(){
-        axios.get(`http://172.16.18.92:3000/todos`)
+        axios.get(`${api}/todos`)
                 .then(function (response) {
 
                     // handle success
@@ -57,7 +60,7 @@
                     document.querySelector("#result").innerHTML = "" 
                   
                     response.data.data.map(eachTodo=>{
-                        document.querySelector("#result").innerHTML += eachTodo 
+                        document.querySelector("#result").innerHTML += eachTodo.text    
                         document.querySelector("#result").innerHTML += '<br>'
 
                     })
